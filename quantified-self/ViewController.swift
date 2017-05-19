@@ -17,7 +17,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var textField: UITextField!
     
     @IBAction func submitPressed(_ sender: Any) {
-        print(Int(textField.text))
+        print(Int(textField.text!)!)
     }
     
 }
