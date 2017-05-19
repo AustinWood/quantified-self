@@ -7,6 +7,9 @@
 //
 
 import UIKit
+import Just
+
+// https://github.com/JustHTTP/Just
 
 class ViewController: UIViewController {
 
@@ -17,7 +20,9 @@ class ViewController: UIViewController {
     @IBOutlet weak var textField: UITextField!
     
     @IBAction func submitPressed(_ sender: Any) {
-        print(Int(textField.text!)!)
+//        print(Int(textField.text!)!)
+        let res = Just.get("https://austinbio.herokuapp.com/api/users")
+        print(res.json)
     }
     
 }

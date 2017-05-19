@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		42786EB11ECF4A430023E37E /* Just.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42786EAE1ECF4A3A0023E37E /* Just.framework */; };
+		42786EB21ECF4A430023E37E /* Just.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 42786EAE1ECF4A3A0023E37E /* Just.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		42CE2FF31ECF44F40069F20C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42CE2FF21ECF44F40069F20C /* AppDelegate.swift */; };
 		42CE2FF51ECF44F40069F20C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42CE2FF41ECF44F40069F20C /* ViewController.swift */; };
 		42CE2FF81ECF44F40069F20C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 42CE2FF61ECF44F40069F20C /* Main.storyboard */; };
@@ -15,7 +17,46 @@
 		42CE30001ECF44F40069F20C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 42CE2FFE1ECF44F40069F20C /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		42786EAD1ECF4A3A0023E37E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 42786EA81ECF4A3A0023E37E /* Just.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 37C817071DA973C600881C06;
+			remoteInfo = Just;
+		};
+		42786EAF1ECF4A3A0023E37E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 42786EA81ECF4A3A0023E37E /* Just.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 37C8170F1DA973C600881C06;
+			remoteInfo = JustTests;
+		};
+		42786EB31ECF4A430023E37E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 42786EA81ECF4A3A0023E37E /* Just.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 37C817061DA973C600881C06;
+			remoteInfo = Just;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		42786EB51ECF4A430023E37E /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				42786EB21ECF4A430023E37E /* Just.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		42786EA81ECF4A3A0023E37E /* Just.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Just.xcodeproj; path = "../../Downloads/Just-master/Just.xcodeproj"; sourceTree = "<group>"; };
 		42CE2FEF1ECF44F40069F20C /* quantified-self.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "quantified-self.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		42CE2FF21ECF44F40069F20C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		42CE2FF41ECF44F40069F20C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -31,15 +72,26 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				42786EB11ECF4A430023E37E /* Just.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		42786EA91ECF4A3A0023E37E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				42786EAE1ECF4A3A0023E37E /* Just.framework */,
+				42786EB01ECF4A3A0023E37E /* JustTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		42CE2FE61ECF44F40069F20C = {
 			isa = PBXGroup;
 			children = (
+				42786EA81ECF4A3A0023E37E /* Just.xcodeproj */,
 				42CE2FF11ECF44F40069F20C /* quantified-self */,
 				42CE2FF01ECF44F40069F20C /* Products */,
 			);
@@ -77,10 +129,12 @@
 				42CE2FEB1ECF44F40069F20C /* Sources */,
 				42CE2FEC1ECF44F40069F20C /* Frameworks */,
 				42CE2FED1ECF44F40069F20C /* Resources */,
+				42786EB51ECF4A430023E37E /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				42786EB41ECF4A430023E37E /* PBXTargetDependency */,
 			);
 			name = "quantified-self";
 			productName = "quantified-self";
@@ -115,12 +169,35 @@
 			mainGroup = 42CE2FE61ECF44F40069F20C;
 			productRefGroup = 42CE2FF01ECF44F40069F20C /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 42786EA91ECF4A3A0023E37E /* Products */;
+					ProjectRef = 42786EA81ECF4A3A0023E37E /* Just.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				42CE2FEE1ECF44F40069F20C /* quantified-self */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		42786EAE1ECF4A3A0023E37E /* Just.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Just.framework;
+			remoteRef = 42786EAD1ECF4A3A0023E37E /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		42786EB01ECF4A3A0023E37E /* JustTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = JustTests.xctest;
+			remoteRef = 42786EAF1ECF4A3A0023E37E /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		42CE2FED1ECF44F40069F20C /* Resources */ = {
@@ -147,6 +224,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		42786EB41ECF4A430023E37E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Just;
+			targetProxy = 42786EB31ECF4A430023E37E /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		42CE2FF61ECF44F40069F20C /* Main.storyboard */ = {
@@ -266,6 +351,7 @@
 		42CE30051ECF44F40069F20C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = ATN7UULDN9;
 				INFOPLIST_FILE = "quantified-self/Info.plist";
@@ -279,6 +365,7 @@
 		42CE30061ECF44F40069F20C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = ATN7UULDN9;
 				INFOPLIST_FILE = "quantified-self/Info.plist";
@@ -308,6 +395,7 @@
 				42CE30061ECF44F40069F20C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
