@@ -20,20 +20,12 @@ class ViewController: UIViewController {
     @IBOutlet weak var textField: UITextField!
     
     @IBAction func submitPressed(_ sender: Any) {
-        Just.get("https://austinbio.herokuapp.com/api/users") { (r) in
+        Just.post(
+            "https://austinbio.herokuapp.com/api/heart_rates",
+            data: ["value": 1]
+        ) { r in
             print(r)
-            print(r.json ?? "No JSON")
-            print("")
-        }
-        
-//        let heartRate = Int(textField.text!)!
-//        let data = ["heartrate": 2]
-        Just.patch("https://austinbio.herokuapp.com/api/users/1") { (r) in
-            print(r)
-            print(r.json ?? "No JSON")
-            print("")
         }
     }
     
 }
-
