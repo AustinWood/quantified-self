@@ -16,7 +16,7 @@ class ViewController: UIViewController {
 
     let healthKitStore = HKHealthStore()
     var value: Int?
-    var date: String?
+    var date_str: String?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,7 +31,7 @@ class ViewController: UIViewController {
     }
     
     func checkForResult() {
-        if value != nil && date != nil {
+        if value != nil && date_str != nil {
             postData()
         } else {
             DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
@@ -41,7 +41,7 @@ class ViewController: UIViewController {
     }
     
     func postData() {
-        let data = ["value": value!, "date": date!] as [String : Any]
+        let data = ["value": value!, "date_str": date_str!] as [String : Any]
         print(data)
         Just.post(
             "https://austinbio.herokuapp.com/api/heart_rates",
@@ -49,6 +49,8 @@ class ViewController: UIViewController {
         ) { r in
             print(r)
         }
+        value = nil
+        date_str = nil
     }
     
     func requestHKPerimssions() {
@@ -86,7 +88,7 @@ class ViewController: UIViewController {
 //                }
                 let result = results?.last as! HKQuantitySample
                 self.value = Int(result.quantity.doubleValue(for: HKUnit(from: "count/min")))
-                self.date = "\(result.startDate)"
+                self.date_str = "\(result.startDate)"
             }
         }
         self.healthKitStore.execute(tHeartRateQuery)
