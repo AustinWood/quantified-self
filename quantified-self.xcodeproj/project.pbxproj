@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		42786EB11ECF4A430023E37E /* Just.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42786EAE1ECF4A3A0023E37E /* Just.framework */; };
 		42786EB21ECF4A430023E37E /* Just.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 42786EAE1ECF4A3A0023E37E /* Just.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		42C889A31ED0D94100104A40 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42C889A21ED0D94100104A40 /* HealthKit.framework */; };
 		42CE2FF31ECF44F40069F20C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42CE2FF21ECF44F40069F20C /* AppDelegate.swift */; };
 		42CE2FF51ECF44F40069F20C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42CE2FF41ECF44F40069F20C /* ViewController.swift */; };
 		42CE2FF81ECF44F40069F20C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 42CE2FF61ECF44F40069F20C /* Main.storyboard */; };
@@ -57,6 +58,8 @@
 
 /* Begin PBXFileReference section */
 		42786EA81ECF4A3A0023E37E /* Just.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Just.xcodeproj; path = "../../Downloads/Just-master/Just.xcodeproj"; sourceTree = "<group>"; };
+		42C889A01ED0D94100104A40 /* quantified-self.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "quantified-self.entitlements"; sourceTree = "<group>"; };
+		42C889A21ED0D94100104A40 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
 		42CE2FEF1ECF44F40069F20C /* quantified-self.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "quantified-self.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		42CE2FF21ECF44F40069F20C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		42CE2FF41ECF44F40069F20C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -73,6 +76,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				42786EB11ECF4A430023E37E /* Just.framework in Frameworks */,
+				42C889A31ED0D94100104A40 /* HealthKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -88,12 +92,21 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		42C889A11ED0D94100104A40 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				42C889A21ED0D94100104A40 /* HealthKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		42CE2FE61ECF44F40069F20C = {
 			isa = PBXGroup;
 			children = (
 				42786EA81ECF4A3A0023E37E /* Just.xcodeproj */,
 				42CE2FF11ECF44F40069F20C /* quantified-self */,
 				42CE2FF01ECF44F40069F20C /* Products */,
+				42C889A11ED0D94100104A40 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -108,6 +121,7 @@
 		42CE2FF11ECF44F40069F20C /* quantified-self */ = {
 			isa = PBXGroup;
 			children = (
+				42C889A01ED0D94100104A40 /* quantified-self.entitlements */,
 				42CE2FF21ECF44F40069F20C /* AppDelegate.swift */,
 				42CE2FF41ECF44F40069F20C /* ViewController.swift */,
 				42CE2FF61ECF44F40069F20C /* Main.storyboard */,
@@ -155,6 +169,11 @@
 						CreatedOnToolsVersion = 8.3.2;
 						DevelopmentTeam = ATN7UULDN9;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.HealthKit = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -353,6 +372,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "quantified-self/quantified-self.entitlements";
 				DEVELOPMENT_TEAM = ATN7UULDN9;
 				INFOPLIST_FILE = "quantified-self/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -367,6 +387,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "quantified-self/quantified-self.entitlements";
 				DEVELOPMENT_TEAM = ATN7UULDN9;
 				INFOPLIST_FILE = "quantified-self/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

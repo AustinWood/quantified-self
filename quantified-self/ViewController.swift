@@ -8,13 +8,17 @@
 
 import UIKit
 import Just
+import HealthKit
 
 // https://github.com/JustHTTP/Just
 
 class ViewController: UIViewController {
+    
+    let healthKitStore = HKHealthStore()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        requestHKPerimssions()
     }
     
     @IBOutlet weak var textField: UITextField!
@@ -28,4 +32,29 @@ class ViewController: UIViewController {
         }
     }
     
+    func requestHKPerimssions() {
+        if HKHealthStore.isHealthDataAvailable() {
+            print("HK data is available")
+            let shareTypes = Set<HKSampleType>()
+            var readTypes = Set<HKObjectType>()
+            readTypes.insert(HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.heartRate)!)
+            healthKitStore.requestAuthorization(toShare: shareTypes, read: readTypes) { (success, error) -> Void in
+                if success {
+                    print("Successfully requested HK authorization")
+                } else {
+                    print("Failed to authorize HK")
+                }
+                if let error = error {
+                    print(error)
+                }
+            }
+        } else {
+            print("HK data is NOT available")
+        }
+    }
+    
+    func getHeartRate() {
+        
+        
+    }
 }
