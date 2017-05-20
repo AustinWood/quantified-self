@@ -24,12 +24,13 @@ class ViewController: UIViewController {
     @IBOutlet weak var textField: UITextField!
     
     @IBAction func submitPressed(_ sender: Any) {
-        Just.post(
-            "https://austinbio.herokuapp.com/api/heart_rates",
-            data: ["value": 1]
-        ) { r in
-            print(r)
-        }
+        getHeartRate()
+//        Just.post(
+//            "https://austinbio.herokuapp.com/api/heart_rates",
+//            data: ["value": 1]
+//        ) { r in
+//            print(r)
+//        }
     }
     
     func requestHKPerimssions() {
@@ -54,7 +55,18 @@ class ViewController: UIViewController {
     }
     
     func getHeartRate() {
-        
-        
+        let tHeartRate = HKSampleType.quantityType(forIdentifier: HKQuantityTypeIdentifier.heartRate)
+        let tHeartRateQuery = HKSampleQuery(sampleType: tHeartRate!, predicate:.none, limit: 0, sortDescriptors: nil) { query, results, error in
+            if (results?.count)! > 0 {
+                var string:String = ""
+                for result in results as! [HKQuantitySample] {
+                    let HeartRate = result.quantity
+                    string = "\(HeartRate)"
+                    print(string)
+                }
+            }
+        }
+        self.healthKitStore.execute(tHeartRateQuery)
+        print(tHeartRate)
     }
 }
