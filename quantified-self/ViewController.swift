@@ -9,6 +9,8 @@
 import UIKit
 import Just
 import HealthKit
+import CoreLocation
+import MapKit
 
 // https://github.com/JustHTTP/Just
 
@@ -29,6 +31,24 @@ class ViewController: UIViewController {
         getHeartRate()
         checkForResult()
     }
+    
+    //////
+    
+    fileprivate var locations = [MKPointAnnotation]()
+    
+    private lazy var locationManager: CLLocationManager = {
+        let manager = CLLocationManager()
+        manager.desiredAccuracy = kCLLocationAccuracyBest
+        manager.delegate = self as! CLLocationManagerDelegate
+        manager.requestAlwaysAuthorization()
+        return manager
+    }()
+    
+    
+    
+    
+    
+    //////
     
     func checkForResult() {
         if value != nil && date_str != nil {
@@ -93,4 +113,48 @@ class ViewController: UIViewController {
         }
         self.healthKitStore.execute(tHeartRateQuery)
     }
+}
+
+
+
+
+
+
+
+
+
+
+
+// MARK: - CLLocationManagerDelegate
+extension ViewController: CLLocationManagerDelegate {
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        guard let mostRecentLocation = locations.last else {
+            return
+        }
+        
+        // Add another annotation to the map.
+        let annotation = MKPointAnnotation()
+        annotation.coordinate = mostRecentLocation.coordinate
+        
+        // Also add to our map so we can remove old values later
+        self.locations.append(annotation)
+        
+        // Remove values if the array is too big
+        while locations.count > 100 {
+            let annotationToRemove = self.locations.first!
+            self.locations.remove(at: 0)
+            
+            // Also remove from the map
+//            mapView.removeAnnotation(annotationToRemove)
+        }
+        
+        if UIApplication.shared.applicationState == .active {
+//            mapView.showAnnotations(self.locations, animated: true)
+            print("App is in foreground. New location is %@", mostRecentLocation)
+        } else {
+            print("App is backgrounded. New location is %@", mostRecentLocation)
+        }
+    }
+    
 }
