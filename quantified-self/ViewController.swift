@@ -26,13 +26,6 @@ class ViewController: UIViewController {
         initializeAudioPlayer()
     }
     
-    @IBOutlet weak var textField: UITextField!
-    
-    @IBAction func submitPressed(_ sender: Any) {
-        getHeartRate()
-        checkForResult()
-    }
-    
     func checkForResult() {
         if value != nil && date_str != nil {
             postData()
@@ -81,18 +74,23 @@ class ViewController: UIViewController {
         
         let tHeartRate = HKSampleType.quantityType(forIdentifier: HKQuantityTypeIdentifier.heartRate)
         let tHeartRateQuery = HKSampleQuery(sampleType: tHeartRate!, predicate:.none, limit: 0, sortDescriptors: nil) { query, results, error in
-            if (results?.count)! > 0 {
-//                var string:String = ""
-//                for result in results as! [HKQuantitySample] {
-//                    let HeartRate = result.quantity
-//                    string = "\(HeartRate)"
-//                    print(string)
-//                    print(result.startDate)
-//                }
-                let result = results?.last as! HKQuantitySample
-                self.value = Int(result.quantity.doubleValue(for: HKUnit(from: "count/min")))
-                self.date_str = "\(result.startDate)"
+            if results != nil {
+                if (results?.count)! > 0 {
+                    //                var string:String = ""
+                    //                for result in results as! [HKQuantitySample] {
+                    //                    let HeartRate = result.quantity
+                    //                    string = "\(HeartRate)"
+                    //                    print(string)
+                    //                    print(result.startDate)
+                    //                }
+                    let result = results?.last as! HKQuantitySample
+                    self.value = Int(result.quantity.doubleValue(for: HKUnit(from: "count/min")))
+                    self.date_str = "\(result.startDate)"
+                }
+            } else {
+                print("results was nil")
             }
+            
         }
         self.healthKitStore.execute(tHeartRateQuery)
     }
@@ -126,7 +124,9 @@ class ViewController: UIViewController {
             print("Failed to set audio session category.  Error: \(error)")
         }
         
-        player.addPeriodicTimeObserver(forInterval: CMTimeMake(1, 100), queue: DispatchQueue.main) {
+        let seconds: Int64 = 10
+        let preferredTimeScale: Int32 = 1
+        player.addPeriodicTimeObserver(forInterval: CMTimeMake(seconds, preferredTimeScale), queue: DispatchQueue.main) {
             [weak self] time in
             let timeString = String(format: "%02.2f", CMTimeGetSeconds(time))
             
@@ -135,6 +135,9 @@ class ViewController: UIViewController {
             } else {
                 print("Background: \(timeString)")
             }
+            
+            self?.getHeartRate()
+            self?.checkForResult()
         }
         
         playAudio()
