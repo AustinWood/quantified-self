@@ -24,17 +24,16 @@
 	<string></string>
 	<key>NSHealthUpdateUsageDescription</key>
 	<string></string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>I just need it</string>
 	<key>UIBackgroundModes</key>
 	<array>
-		<string>fetch</string>
-		<string>location</string>
+		<string>audio</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
-	<key>NSLocationAlwaysUsageDescription</key>
-	<string>I just need it</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>

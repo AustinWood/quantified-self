@@ -16,6 +16,7 @@
 		42CE2FFB1ECF44F40069F20C /* quantified_self.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 42CE2FF91ECF44F40069F20C /* quantified_self.xcdatamodeld */; };
 		42CE2FFD1ECF44F40069F20C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 42CE2FFC1ECF44F40069F20C /* Assets.xcassets */; };
 		42CE30001ECF44F40069F20C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 42CE2FFE1ECF44F40069F20C /* LaunchScreen.storyboard */; };
+		42E7AE651ED20A3800EB9355 /* 1-hour-of-silence.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 42E7AE641ED20A3800EB9355 /* 1-hour-of-silence.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,6 +69,7 @@
 		42CE2FFC1ECF44F40069F20C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		42CE2FFF1ECF44F40069F20C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		42CE30011ECF44F40069F20C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		42E7AE641ED20A3800EB9355 /* 1-hour-of-silence.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "1-hour-of-silence.mp3"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,6 +124,7 @@
 			isa = PBXGroup;
 			children = (
 				42C889A01ED0D94100104A40 /* quantified-self.entitlements */,
+				42E7AE641ED20A3800EB9355 /* 1-hour-of-silence.mp3 */,
 				42CE2FF21ECF44F40069F20C /* AppDelegate.swift */,
 				42CE2FF41ECF44F40069F20C /* ViewController.swift */,
 				42CE2FF61ECF44F40069F20C /* Main.storyboard */,
@@ -227,6 +230,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				42CE30001ECF44F40069F20C /* LaunchScreen.storyboard in Resources */,
+				42E7AE651ED20A3800EB9355 /* 1-hour-of-silence.mp3 in Resources */,
 				42CE2FFD1ECF44F40069F20C /* Assets.xcassets in Resources */,
 				42CE2FF81ECF44F40069F20C /* Main.storyboard in Resources */,
 			);

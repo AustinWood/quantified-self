@@ -9,10 +9,10 @@
 import UIKit
 import Just
 import HealthKit
-import CoreLocation
-import MapKit
+import AVFoundation
 
 // https://github.com/JustHTTP/Just
+// https://www.raywenderlich.com/143128/background-modes-tutorial-getting-started
 
 class ViewController: UIViewController {
 
@@ -23,6 +23,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         requestHKPerimssions()
+        initializeAudioPlayer()
     }
     
     @IBOutlet weak var textField: UITextField!
@@ -31,24 +32,6 @@ class ViewController: UIViewController {
         getHeartRate()
         checkForResult()
     }
-    
-    //////
-    
-    fileprivate var locations = [MKPointAnnotation]()
-    
-    private lazy var locationManager: CLLocationManager = {
-        let manager = CLLocationManager()
-        manager.desiredAccuracy = kCLLocationAccuracyBest
-        manager.delegate = self as! CLLocationManagerDelegate
-        manager.requestAlwaysAuthorization()
-        return manager
-    }()
-    
-    
-    
-    
-    
-    //////
     
     func checkForResult() {
         if value != nil && date_str != nil {
@@ -113,48 +96,70 @@ class ViewController: UIViewController {
         }
         self.healthKitStore.execute(tHeartRateQuery)
     }
-}
-
-
-
-
-
-
-
-
-
-
-
-// MARK: - CLLocationManagerDelegate
-extension ViewController: CLLocationManagerDelegate {
     
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        guard let mostRecentLocation = locations.last else {
-            return
+    
+    
+    ////////////////////////////
+    ////////////////////////////
+    ///// BACKGROUND AUDIO /////
+    ////////////////////////////
+    ////////////////////////////
+    
+    lazy var player: AVQueuePlayer = self.makePlayer()
+    
+    private lazy var songs: [AVPlayerItem] = {
+        let songNames = ["1-hour-of-silence"]
+        return songNames.map {
+            let url = Bundle.main.url(forResource: $0, withExtension: "mp3")!
+            return AVPlayerItem(url: url)
+        }
+    }()
+    
+    func initializeAudioPlayer() {
+        super.viewDidLoad()
+        
+        do {
+            try AVAudioSession.sharedInstance().setCategory(
+                AVAudioSessionCategoryPlayAndRecord,
+                with: .defaultToSpeaker)
+        } catch {
+            print("Failed to set audio session category.  Error: \(error)")
         }
         
-        // Add another annotation to the map.
-        let annotation = MKPointAnnotation()
-        annotation.coordinate = mostRecentLocation.coordinate
-        
-        // Also add to our map so we can remove old values later
-        self.locations.append(annotation)
-        
-        // Remove values if the array is too big
-        while locations.count > 100 {
-            let annotationToRemove = self.locations.first!
-            self.locations.remove(at: 0)
+        player.addPeriodicTimeObserver(forInterval: CMTimeMake(1, 100), queue: DispatchQueue.main) {
+            [weak self] time in
+            let timeString = String(format: "%02.2f", CMTimeGetSeconds(time))
             
-            // Also remove from the map
-//            mapView.removeAnnotation(annotationToRemove)
+            if UIApplication.shared.applicationState == .active {
+                print("Foreground: \(timeString)")
+            } else {
+                print("Background: \(timeString)")
+            }
         }
         
-        if UIApplication.shared.applicationState == .active {
-//            mapView.showAnnotations(self.locations, animated: true)
-            print("App is in foreground. New location is %@", mostRecentLocation)
-        } else {
-            print("App is backgrounded. New location is %@", mostRecentLocation)
+        playAudio()
+    }
+    
+    private func makePlayer() -> AVQueuePlayer {
+        let player = AVQueuePlayer(items: songs)
+        player.actionAtItemEnd = .advance
+        player.addObserver(self, forKeyPath: "currentItem", options: [.new, .initial] , context: nil)
+        return player
+    }
+    
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        if keyPath == "currentItem", let player = object as? AVPlayer,
+            let currentItem = player.currentItem?.asset as? AVURLAsset {
+            // songLabel.text = currentItem.urlh.lastPathComponent
         }
+    }
+    
+    func playAudio() {
+        player.play()
+    }
+    
+    func pauseAudio() {
+        player.pause()
     }
     
 }
