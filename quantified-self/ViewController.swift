@@ -5,6 +5,14 @@
 //  Created by Austin Wood on 5/19/17.
 //  Copyright © 2017 Austin Wood. All rights reserved.
 //
+/////////////////
+///// TO DO /////
+//
+// update label in iOS app with data
+// don't make POST request if entry.last hasn't changed
+// fetch heart rate data while phone is locked
+//
+/////////////////
 
 import UIKit
 import Just
@@ -74,6 +82,10 @@ class ViewController: UIViewController {
         
         let tHeartRate = HKSampleType.quantityType(forIdentifier: HKQuantityTypeIdentifier.heartRate)
         let tHeartRateQuery = HKSampleQuery(sampleType: tHeartRate!, predicate:.none, limit: 0, sortDescriptors: nil) { query, results, error in
+            
+//  https://developer.apple.com/reference/healthkit
+//  Because the HealthKit store is encrypted, your app cannot read data from the store when the phone is locked. This means your app may not be able to access the store when it is launched in the background.
+            
             if results != nil {
                 if (results?.count)! > 0 {
                     //                var string:String = ""
@@ -94,8 +106,6 @@ class ViewController: UIViewController {
         }
         self.healthKitStore.execute(tHeartRateQuery)
     }
-    
-    
     
     ////////////////////////////
     ////////////////////////////
